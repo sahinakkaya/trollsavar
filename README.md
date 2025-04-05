@@ -6,7 +6,10 @@
 Trollsavar BlueSky'daki troll hesapları ve onların takipçilerini otomatik olarak kara listeye almanıza yardımcı olan bir araçtır. Önceden belirlenmiş troll hesaplar için kara liste oluşturur ve bu listeler her 24 saatte bir otomatik olarak güncellenir. (\*)
 
 ## Peki neden böyle bir şey yapmak isteyeyim?
-Furkan B\*llükbaşı'nı (ya da X birini) takip etmiyor olabilirsiniz ama siz takip etmeseniz de birileri takip ediyor olacak. B\*llükbaşı'na etkileşim verenlerin de etkileşimini keserseniz kimse B\*llükbaşı'nı takip etmek istemez. B\*llükbaşı mutsuz olur. O mutsuz olursa siz mutlu olursunuz.
+- 👨 <- Bu B\*llükbaşı. Siz onu takip etmiyorsunuz ama birileri ediyor. 
+- B\*llükbaşı'na etkileşim verenlerin de etkileşimini keserseniz kimse B\*llükbaşı'nı takip etmek istemez.
+- 😥 <- B\*llükbaşı kimse onu takip etmek istemediği için mutsuz.
+- O mutsuz olduğu için siz mutlusunuz (🤣🥳🤭)
 
 ### Kara listeye alınan troll hesaplar
 
@@ -17,4 +20,4 @@ Furkan B\*llükbaşı'nı (ya da X birini) takip etmiyor olabilirsiniz ama siz t
 - https://bsky.app/profile/sahinakkaya.dev/lists/3lm3ahlfgv62a
 - https://bsky.app/profile/sahinakkaya.dev/lists/3lm3ahe4rrp26
 
-\*: Yeni bir takipçi geldiğinde listeye ekleniyor fakat eskiden takip edip takibi bırakanlar teknik bir sebepten dolayı listeden otomatik çıkarılmıyor. Manuel olarak çıkarmamı isterseniz bana ulaşabilirsiniz. 
+\*: Yeni bir takipçi geldiğinde listeye ekleniyor fakat eskiden takip edip takibi bırakanlar teknik bir sebepten dolayı listeden otomatik çıkarılmıyor. Manuel olarak çıkarmamı isterseniz bana ulaşabilirsiniz (çıkaracağımı garanti etmiyorum, keyfim bilir. Takip ederken düşünecektiniz 😒)
