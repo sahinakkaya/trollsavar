@@ -1,6 +1,6 @@
 ## Trollsavar
 
-https://github.com/user-attachments/assets/c17a90c0-18ea-48d0-a8f3-715c571638ef
+[!image](https://github.com/user-attachments/assets/c17a90c0-18ea-48d0-a8f3-715c571638ef)
 
 Furkan B\*llükbaşı'nı (ya da X birini) takip etmiyor olabilirsiniz ama siz takip etmeseniz de birileri takip ediyor olacak. B\*llükbaşı'nı takip etmenin de bir cezası olması gerektiğini düşünüyorsanız doğru yerdesiniz. Bu repo sayesinde aşağıdaki troll'leri ve onların tüm takipçilerini otomatik olarak kara listeye ekleyebilir ve hepsini tek seferde engelleyebilirsiniz.
 
