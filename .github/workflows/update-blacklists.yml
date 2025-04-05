@@ -9,7 +9,8 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest  # You can choose another environment if needed
-
+    permissions:
+      contents: write
     steps:
       # Checkout the repository code
       - name: Checkout code
