@@ -7,9 +7,9 @@ Trollsavar BlueSky'daki troll hesapları ve onların takipçilerini otomatik ola
 
 ## Peki neden böyle bir şey yapmak isteyeyim?
 - 👨 <- Bu B\*llükbaşı. Siz onu takip etmiyorsunuz ama birileri ediyor. 
-- B\*llükbaşı'na etkileşim verenlerin de etkileşimini keserseniz kimse B\*llükbaşı'nı takip etmek istemez.
-- 😥 <- B\*llükbaşı kimse onu takip etmek istemediği için mutsuz.
-- O mutsuz olduğu için siz mutlusunuz (🤣🥳🤭)
+- B\*llükbaşı'na etkileşim verenlerin de etkileşimini keserseniz kimse B\*llükbaşı'nı takip etmek istemez 💯.
+- 😥 <- B\*llükbaşı kimse onu takip etmek istemediği için mutsuz olur.
+- O mutsuz olduğu için siz mutlu olursunuz (🤣🥳🤭)
 
 ### Kara listeye alınan troll hesaplar
 
