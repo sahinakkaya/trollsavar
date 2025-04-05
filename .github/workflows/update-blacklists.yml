@@ -4,7 +4,7 @@ name: Update blacklists
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'  # This means the action runs every day at midnight UTC
+    - cron: '15 0 * * *'  # This means the action runs every day at 00.15
 
 jobs:
   run-script:
