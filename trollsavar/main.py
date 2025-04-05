@@ -154,10 +154,12 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
 
 async def main():
     client = AsyncClient()
-    await client.login(os.environ["USERNAME"], os.environ["PASSWORD"])
+    username = os.environ["USERNAME"]
+    password = os.environ["PASSWORD"]
+    await client.login(username, password)
 
     old_lists_data = await client.app.bsky.graph.get_lists(
-        models.AppBskyGraphGetLists.Params(actor="sahinakkaya.dev")
+        models.AppBskyGraphGetLists.Params(actor=username)
     )
     actors_to_blacklist = {
         "misvakcaps.bsky.social": "M*svak Caps Trolleri",  # you can set custom list name or...
