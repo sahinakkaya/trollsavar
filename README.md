@@ -1,8 +1,12 @@
-## Trollsavar
+# Trollsavar
 
 ![image](https://github.com/user-attachments/assets/c17a90c0-18ea-48d0-a8f3-715c571638ef)
 
-Furkan B\*llükbaşı'nı (ya da X birini) takip etmiyor olabilirsiniz ama siz takip etmeseniz de birileri takip ediyor olacak. B\*llükbaşı'nı takip etmenin de bir cezası olması gerektiğini düşünüyorsanız doğru yerdesiniz. Bu repo sayesinde aşağıdaki troll'leri ve onların tüm takipçilerini otomatik olarak kara listeye ekleyebilir ve hepsini tek seferde engelleyebilirsiniz.
+## Nedir bu trollsavar?
+Trollsavar BlueSky'daki troll hesapları ve onların takipçilerini otomatik olarak kara listeye almanıza yardımcı olan bir araçtır.
+
+## Peki neden böyle bir şey yapmak isteyeyim?
+Furkan B\*llükbaşı'nı (ya da X birini) takip etmiyor olabilirsiniz ama siz takip etmeseniz de birileri takip ediyor olacak. B\*llükbaşı'na etkileşim verenlerin de etkileşimini keserseniz kimse B\*llükbaşı'nı takip etmek istemez. B\*llükbaşı mutsuz olur. O mutsuz olursa siz mutlu olursunuz.
 
 ### Kara listeye alınan troll hesaplar
 
