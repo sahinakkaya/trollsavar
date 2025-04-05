@@ -109,6 +109,8 @@ async def create_or_get_blacklist_for_actor(
         avatar_img = draw_red_cross(avatar_url)
         avatar = await client.upload_blob(avatar_img)
         description = f"""{actor_profile.display_name} ve takipçileri. Sağ üstten "Abone ol" tuşuna basarak listedeki herkesi sessize alabilir veya engelleyebilirsiniz. Liste her 24 saatte bir otomatik olarak güncellenir.
+
+Bu listeyi oluşturan kodu github'da bulabilirsiniz: https://github.com/sahinakkaya/trollsavar/
     """
         list_uri = await create_list(client, list_name, description, avatar)
         print("List created:", list_uri)
