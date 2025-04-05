@@ -1,0 +1,47 @@
+name: Update blacklists
+
+# Run the action on a schedule
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # This means the action runs every day at midnight UTC
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest  # You can choose another environment if needed
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'  # Use the Python version you require
+
+      # Install Poetry
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH  # Add Poetry to PATH
+
+      # Install dependencies using Poetry
+      - name: Install dependencies with Poetry
+        run: |
+          poetry install  # Installs dependencies from poetry.lock
+
+      # Run the script
+      - name: Run Python script
+        env:
+          USERNAME: ${{ secrets.USERNAME }}  # Pass secrets (if needed)
+          PASSWORD: ${{ secrets.PASSWORD }}  # Pass secrets (if needed)
+        run: |
+          poetry run python -m trollsavar.main
+
+      - name: Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
+        with:
+          commit_message: "Update blacklists"
+          file_pattern: "blacklists"

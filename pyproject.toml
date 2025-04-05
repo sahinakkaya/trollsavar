@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "trollsavar"
+version = "0.1.0"
+description = "Trollsavar is a simple Python script designed to help manage moderation on BlueSky. It automatically creates a moderation list and adds selected users of your choice, along with all their followers, making it easier for you to block them and reduce unwanted interactions."
+authors = ["Şahin Akkaya <sahin@sahinakkaya.dev>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+atproto = "^0.0.59"
+pillow = "^11.1.0"
+requests = "^2.32.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
