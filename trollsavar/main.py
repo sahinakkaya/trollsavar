@@ -46,6 +46,7 @@ async def add_user_to_list(client, user_did, list_uri):
 
 
 async def remove_user_from_list(client: AsyncClient, list_item_uri):
+    # FIXME: this method is not working for some reason
     at_uri = AtUri.from_str(list_item_uri)
     # print(at_uri.collection, at_uri.host, at_uri.rkey)
 
@@ -137,11 +138,11 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
 
     # TODO: we should remove the users from blacklist who are not following the actor anymore.
     # but the following doesn't work for some reason
-    white_list = old_dids - current_dids
-    print("White list:", white_list)
-    if white_list:
-        print("Removing users from list:", white_list)
-    for did in white_list:
+    whitelist = old_dids - current_dids
+    print("White list:", whitelist)
+    if whitelist:
+        print("Removing users from list:", whitelist)
+    for did in whitelist:
         await remove_user_from_list(client, list_item_uris[did]) # <- this is the problematic part. feel free to open a pr if you know the solution
         del list_item_uris[did]
 
