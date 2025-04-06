@@ -17,7 +17,7 @@ Trollsavar BlueSky'daki troll hesapları ve onların takipçilerini otomatik ola
 - Furkan B*llükbaşı: [@furkancerkesx.bsky.social](https://bsky.app/profile/furkancerkesx.bsky.social)
 - Abdullah Kilim (@abdquil): [@abdquil.bsky.social](https://bsky.app/profile/abdquil.bsky.social)
 
-Kim olduğunu bilmiyorsanız, şurada ekşi başlığı var: https://eksisozluk.com/abdullah-kilim-adli-aktrollun-ifsasi--7933612 başlıktaki link bir şekilde silinirse diye şurada da twitter linki var: https://x.com/hirkomaymo/status/1885035050485338375 Bu twitler Türkiye'de erişime engelli. VPN açıp okuyabilirsiniz.
+    Kim olduğunu bilmiyorsanız, şurada ekşi başlığı var: https://eksisozluk.com/abdullah-kilim-adli-aktrollun-ifsasi--7933612 başlıktaki link bir şekilde silinirse diye şurada da twitter linki var: https://x.com/hirkomaymo/status/1885035050485338375 Bu twitler Türkiye'de erişime engelli. VPN açıp okuyabilirsiniz.
 
 
 
