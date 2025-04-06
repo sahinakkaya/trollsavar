@@ -2,9 +2,12 @@ name: Update blacklists
 
 # Run the action on a schedule
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
-    - cron: '15 0 * * *'  # This means the action runs every day at 00.15
+    - cron: '15 0 * * *'  # This means the action runs every day at 00.15 in UTC+0
 
 jobs:
   run-script:
