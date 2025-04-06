@@ -165,6 +165,7 @@ async def main():
     actors_to_blacklist = {
         "misvakcaps.bsky.social": "M*svak Caps Trolleri",  # you can set custom list name or...
         "furkancerkesx.bsky.social": None,  # leave it as None so it will be generated as "... ve Avaneleri"
+        "abdquil.bsky.social": "Abdullah Kilim (@abdquil) ve Avaneleri",
     }
     # for actor in actors_to_blacklist:
     #     profile = await client.get_profile(actor)
