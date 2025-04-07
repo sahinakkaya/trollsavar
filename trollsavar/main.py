@@ -146,12 +146,34 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
         await remove_user_from_list(client, list_item_uris[did]) # <- this is the problematic part. feel free to open a pr if you know the solution
         del list_item_uris[did]
 
-    # await remove_user_from_list(client, dids_with_uri[actor_profile.did])
-    # await add_user_to_list(client, actor_profile.did, list_uri)
+    await remove_user_from_list(client, list_item_uris[actor_profile.did])
+    await add_user_to_list(client, actor_profile.did, list_uri)
 
     with open(file_name, "w") as f:
         json.dump(list_item_uris, f)
 
+async def block_mod_list(client: AsyncClient, list_uri):
+    await client.app.bsky.graph.listblock.create(
+        repo=client.me.did,
+        record=models.AppBskyGraphListblock.Record(
+            subject=list_uri,
+            created_at=client.get_current_time_iso(),
+        )
+    )
+
+
+async def unblock_mod_list(client: AsyncClient, list_uri):
+    list_info = await client.app.bsky.graph.get_list(
+        models.AppBskyGraphGetList.Params(list=list_uri, limit=1)
+    )
+    blocked = list_info.list.viewer and list_info.list.viewer.blocked
+    print("Blocked:", blocked)
+    if blocked:
+        at_uri = AtUri.from_str(blocked)
+        await client.app.bsky.graph.listblock.delete(
+            client.me.did, at_uri.rkey
+        )
+        print("Unblocked:", blocked)
 
 async def main():
     client = AsyncClient()
@@ -163,19 +185,41 @@ async def main():
         models.AppBskyGraphGetLists.Params(actor=username)
     )
     actors_to_blacklist = {
-        "misvakcaps.bsky.social": "M*svak Caps Trolleri",  # you can set custom list name or...
-        "furkancerkesx.bsky.social": None,  # leave it as None so it will be generated as "... ve Avaneleri"
-        "abdquil.bsky.social": "Abdullah Kilim (@abdquil) ve Avaneleri",
+        "misvakcaps.bsky.social": {"name": "M*svak Caps Trolleri"},  # you can set custom list name or...
+        "furkancerkesx.bsky.social": {"name": None},  # leave it as None so it will be generated as "... ve Avaneleri"
+        "abdquil.bsky.social": {"name": "Abdullah Kilim (@abdquil) ve Avaneleri"}
     }
     # for actor in actors_to_blacklist:
     #     profile = await client.get_profile(actor)
     #     print(profile.did, profile.display_name)
-    for actor, list_name in actors_to_blacklist.items():
+
+
+    # unblock all lists first, update them and then block them again. blocking and unblocking would
+    # be unncessary if I didn't want to have them blocked in my personal account. but I don't want
+    # see them, so I have to unblock the lists in order to get all the followers
+
+    for actor, value in actors_to_blacklist.items():
+        list_name = value["name"]
         actor_profile = await client.get_profile(actor)
         list_uri = await create_or_get_blacklist_for_actor(
             client, actor_profile, list_name, old_lists_data.lists
         )
+        actors_to_blacklist[actor]["list_uri"] = list_uri
+        actors_to_blacklist[actor]["actor_profile"] = actor_profile
+        await unblock_mod_list(client, list_uri)
+
+    await asyncio.sleep(5)
+
+    # then we update the lists with the followers
+    for actor, value in actors_to_blacklist.items():
+        actor_profile = value["actor_profile"]
+        list_uri = value["list_uri"]
         await update_list(client, actor_profile, list_uri)
+
+    
+    for actor, value in actors_to_blacklist.items():
+        list_uri = value["list_uri"]
+        await block_mod_list(client, list_uri)
 
     # Delete old lists
     # await delete_lists(client, old_lists_data.lists)
