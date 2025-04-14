@@ -1,13 +1,14 @@
 import asyncio
 import json
 import os
-from datetime import datetime
+from datetime import datetime, UTC
 
 from atproto import AsyncClient, AtUri, models
 
 from trollsavar.image import draw_red_cross
 
 LIMIT = 100
+
 
 async def create_list(client: AsyncClient, name: str, description: str, avatar):
     response = await client.com.atproto.repo.create_record(
@@ -95,11 +96,12 @@ async def get_users_to_blacklist(client: AsyncClient, actor):
     blacklist.add(actor.did)
     return blacklist
 
+
 def get_description(name, follower_count):
-        return f"""{name} ve takipçileri. Sağ üstten "Abone ol" diyerek listedeki herkesi sessize alabilir veya engelleyebilirsiniz. Liste her 24 saatte bir güncellenir.
+    return f"""{name} ve takipçileri. Sağ üstten "Abone ol" diyerek listedeki herkesi sessize alabilir veya engelleyebilirsiniz. Liste her 24 saatte bir güncellenir.
 
 Kod: https://github.com/sahinakkaya/trollsavar/
-Son güncelleme: {datetime.now().strftime("%Y-%m-%d %H:%M")}
+Son güncelleme: {datetime.now(UTC).strftime("%Y-%m-%d %H:%M")}
 Listedeki kişi sayısı: {follower_count}"""
 
 
@@ -125,24 +127,9 @@ Bu listeyi oluşturan kodu github'da bulabilirsiniz: https://github.com/sahinakk
         print("List created:", list_uri)
     print(list_name)
     return list_uri
-"""
-const {repo, collection, rkey} = new AtUri(listUri)
 
-// get the current record
-const {value: record} = await agent.com.atproto.repo.getRecord({repo, collection, rkey})
 
-// modify the fields
-record.name = newName
-record.description = newDescription
-// etc
 
-await agent.com.atproto.repo.putRecord({
-  repo: currentAccount.did,
-  collection,
-  rkey,
-  record,
-})
-"""
 
 async def update_list_metadata(client: AsyncClient, list_uri, description):
     at_uri = AtUri.from_str(list_uri)
@@ -153,6 +140,8 @@ async def update_list_metadata(client: AsyncClient, list_uri, description):
             rkey=at_uri.rkey,
         )
     )
+    description = description.replace("https://github.com/sahinakkaya/trollsavar/", "github.com/sahinakkaya/...")
+
     list_info.value.description = description
     await client.com.atproto.repo.put_record(
         models.ComAtprotoRepoPutRecord.Data(
@@ -162,7 +151,6 @@ async def update_list_metadata(client: AsyncClient, list_uri, description):
             record=list_info.value,
         )
     )
-
 
 
 async def update_list(client: AsyncClient, actor_profile, list_uri):
@@ -189,7 +177,9 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
     if whitelist:
         print("Removing users from list:", whitelist)
     for did in whitelist:
-        await remove_user_from_list(client, list_item_uris[did]) # <- this is the problematic part. feel free to open a pr if you know the solution
+        await remove_user_from_list(
+            client, list_item_uris[did]
+        )  # <- this is the problematic part. feel free to open a pr if you know the solution
         del list_item_uris[did]
 
     await remove_user_from_list(client, list_item_uris[actor_profile.did])
@@ -200,13 +190,14 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
     with open(file_name, "w") as f:
         json.dump(list_item_uris, f)
 
+
 async def block_mod_list(client: AsyncClient, list_uri):
     await client.app.bsky.graph.listblock.create(
         repo=client.me.did,
         record=models.AppBskyGraphListblock.Record(
             subject=list_uri,
             created_at=client.get_current_time_iso(),
-        )
+        ),
     )
 
 
@@ -264,7 +255,6 @@ async def main():
         list_uri = value["list_uri"]
         await update_list(client, actor_profile, list_uri)
 
-    
     for actor, value in actors_to_blacklist.items():
         list_uri = value["list_uri"]
         await block_mod_list(client, list_uri)
