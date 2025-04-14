@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+from datetime import datetime
 
 from atproto import AsyncClient, AtUri, models
 
@@ -94,6 +95,13 @@ async def get_users_to_blacklist(client: AsyncClient, actor):
     blacklist.add(actor.did)
     return blacklist
 
+def get_description(name, follower_count):
+        return f"""{name} ve takipçileri. Sağ üstten "Abone ol" diyerek listedeki herkesi sessize alabilir veya engelleyebilirsiniz. Liste her 24 saatte bir güncellenir.
+
+Kod: https://github.com/sahinakkaya/trollsavar/
+Son güncelleme: {datetime.now().strftime("%Y-%m-%d %H:%M")}
+Listedeki kişi sayısı: {follower_count}"""
+
 
 async def create_or_get_blacklist_for_actor(
     client: AsyncClient, actor_profile, list_name, existing_lists
@@ -117,6 +125,44 @@ Bu listeyi oluşturan kodu github'da bulabilirsiniz: https://github.com/sahinakk
         print("List created:", list_uri)
     print(list_name)
     return list_uri
+"""
+const {repo, collection, rkey} = new AtUri(listUri)
+
+// get the current record
+const {value: record} = await agent.com.atproto.repo.getRecord({repo, collection, rkey})
+
+// modify the fields
+record.name = newName
+record.description = newDescription
+// etc
+
+await agent.com.atproto.repo.putRecord({
+  repo: currentAccount.did,
+  collection,
+  rkey,
+  record,
+})
+"""
+
+async def update_list_metadata(client: AsyncClient, list_uri, description):
+    at_uri = AtUri.from_str(list_uri)
+    list_info = await client.com.atproto.repo.get_record(
+        models.ComAtprotoRepoGetRecord.Params(
+            repo=at_uri.host,
+            collection=at_uri.collection,
+            rkey=at_uri.rkey,
+        )
+    )
+    list_info.value.description = description
+    await client.com.atproto.repo.put_record(
+        models.ComAtprotoRepoPutRecord.Data(
+            repo=client.me.did,
+            collection=at_uri.collection,
+            rkey=at_uri.rkey,
+            record=list_info.value,
+        )
+    )
+
 
 
 async def update_list(client: AsyncClient, actor_profile, list_uri):
@@ -148,6 +194,8 @@ async def update_list(client: AsyncClient, actor_profile, list_uri):
 
     await remove_user_from_list(client, list_item_uris[actor_profile.did])
     await add_user_to_list(client, actor_profile.did, list_uri)
+    description = get_description(actor_profile.display_name, len(list_item_uris))
+    await update_list_metadata(client, list_uri, description)
 
     with open(file_name, "w") as f:
         json.dump(list_item_uris, f)
