@@ -1,7 +1,8 @@
 import asyncio
+from zoneinfo import ZoneInfo
 import json
 import os
-from datetime import datetime, UTC
+from datetime import datetime
 
 from atproto import AsyncClient, AtUri, models
 
@@ -101,7 +102,7 @@ def get_description(name, follower_count):
     return f"""{name} ve takipçileri. Sağ üstten "Abone ol" diyerek listedeki herkesi sessize alabilir veya engelleyebilirsiniz. Liste her 24 saatte bir güncellenir.
 
 Kod: https://github.com/sahinakkaya/trollsavar/
-Son güncelleme: {datetime.now(UTC).strftime("%Y-%m-%d %H:%M")}
+Son güncelleme: {datetime.now(ZoneInfo("Europe/Istanbul")).strftime("%Y-%m-%d %H:%M")}
 Listedeki kişi sayısı: {follower_count}"""
 
 
